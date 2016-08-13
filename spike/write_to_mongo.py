@@ -1,8 +1,11 @@
 from pymongo import MongoClient
+import pymongo
 
 client = MongoClient()
 
 db = client.test_db
+db.dataset.create_index([("name", pymongo.ASCENDING)])
+db.dataset.create_index([("role", pymongo.ASCENDING)])
 
 result = db.dataset.insert_one({'name': 'clark', 'role': 'architect'})
 print "data inserted at {}".format(result.inserted_id)
@@ -13,9 +16,14 @@ print "data inserted at {}".format(result.inserted_id)
 result = db.dataset.insert_one({'name': 'bill', 'role': 'plumber'})
 print "data inserted at {}".format(result.inserted_id)
 
-all_plumbers = db.dataset.find({'role':'plumber'})
-print "All plumbers:"
-for plumber in all_plumbers:
-    print plumber['name']
+employees = db.dataset.find()
+print "Employees:"
+for employee in employees:
+    print employee['name']
 
-print "Total employees: {}".format(db.dataset.find().count())
+print "Plumbers:"
+for employee in db.dataset.find({"role": "plumber"}):
+    print employee['name']
+
+total_employees = db.dataset.count()
+print "Total Employees: {}".format(total_employees)
