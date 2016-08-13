@@ -4,26 +4,27 @@ import pymongo
 client = MongoClient()
 
 db = client.test_db
-db.dataset.create_index([("name", pymongo.ASCENDING)])
-db.dataset.create_index([("role", pymongo.ASCENDING)])
+dataset = db.dataset
+dataset.create_index([("name", pymongo.ASCENDING)])
+dataset.create_index([("role", pymongo.ASCENDING)])
 
-result = db.dataset.insert_one({'name': 'clark', 'role': 'architect'})
+result = dataset.insert_one({'name': 'clark', 'role': 'architect'})
 print "data inserted at {}".format(result.inserted_id)
 
-result = db.dataset.insert_one({'name': 'ted', 'role': 'plumber'})
+result = dataset.insert_one({'name': 'ted', 'role': 'plumber'})
 print "data inserted at {}".format(result.inserted_id)
 
-result = db.dataset.insert_one({'name': 'bill', 'role': 'plumber'})
+result = dataset.insert_one({'name': 'bill', 'role': 'plumber'})
 print "data inserted at {}".format(result.inserted_id)
 
-employees = db.dataset.find()
+employees = dataset.find()
 print "Employees:"
 for employee in employees:
     print employee['name']
 
 print "Plumbers:"
-for employee in db.dataset.find({"role": "plumber"}):
+for employee in dataset.find({"role": "plumber"}):
     print employee['name']
 
-total_employees = db.dataset.count()
+total_employees = dataset.count()
 print "Total Employees: {}".format(total_employees)
