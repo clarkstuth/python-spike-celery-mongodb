@@ -4,7 +4,7 @@ DEPENDENCIES
   rabbitmq
 
 GRAPH
-  apt (4.0.1)
+  apt (4.0.2)
     compat_resource (>= 12.10)
   build-essential (6.0.3)
     compat_resource (>= 12.10)

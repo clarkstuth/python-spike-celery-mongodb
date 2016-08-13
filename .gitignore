@@ -1,3 +1,3 @@
 .idea
-vagrant/.vagrant
-vagrant/cookbooks
+.vagrant
+/cookbooks/

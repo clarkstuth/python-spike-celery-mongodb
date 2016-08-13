@@ -24,9 +24,8 @@ Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision "chef_solo" do |chef|
-    chef.add_recipe "rabbitmq"
-    chef.add_recipe "mongodb"
-    chef.json = {"rabbitmq" => {"mgmt_console" => true}}
+    chef.roles_path = 'roles'
+    chef.add_role "rabbitmq_and_mongodb"
   end
 
 end
