@@ -1,3 +1,3 @@
 from celery_config import load
 
-load.delay("something")
+load.delay({"data": "value", "subvalue": {"something": "else"}})
